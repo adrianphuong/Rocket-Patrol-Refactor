@@ -1,3 +1,7 @@
+class Play extends Phaser.Scene {
+    constructor() {
+        super("playScene");
+    }
 // preload method: called once per scene before the create() method.
 // Preload assets, such as images and audio, that will be used in the scene.
 preload() {
@@ -120,3 +124,4 @@ create() {
         
         this.sound.play('sfx_explosion');
       }
+    }
