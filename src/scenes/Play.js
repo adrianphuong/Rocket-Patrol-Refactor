@@ -4,7 +4,9 @@
 // Implement the speed increase that happens after 30 seconds in the original game (5)
 // Added parallax scrolling to the menu screen
 // Added new spaceship sprites that move faster and worth more points
-// Curr total: 65/100
+// space music
+// is firing with movement
+// Curr total: 75/100
 class Play extends Phaser.Scene {
     constructor() {
         super("playScene");
@@ -13,6 +15,7 @@ class Play extends Phaser.Scene {
 // Preload assets, such as images and audio, that will be used in the scene.
 preload() {
     // load images and spritesheets
+    this.load.audio('music', 'assets/spacemusic.mp3');
     this.load.image('rocket', './assets/rocket.png');
     this.load.image('spaceship', './assets/spaceship.png');
     this.load.image('fastspaceship', `./assets/spaceship.gif`);
@@ -89,7 +92,11 @@ create() {
         callbackScope: this,
         loop: true
     });
-  
+    // add the music to the scene
+    let music = this.sound.add('music');
+    // play the music in a loop
+    music.play({ loop: true });
+
     // set up score tracking
     this.p1Score = 0;
     let scoreConfig = {
