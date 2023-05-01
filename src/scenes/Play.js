@@ -2,10 +2,11 @@
 // Create a new title screen (e.g., new artwork, typography, layout) (10)
 // Implement a new timing/scoring mechanism that adds time to the clock for successful hits (15)
 // Implement the speed increase that happens after 30 seconds in the original game (5)
-// Added parallax scrolling to the menu screen
-// Added new spaceship sprites that move faster and worth more points
-// space music
-// is firing with movement
+// Added parallax scrolling to the menu screen (10)
+// Added new spaceship sprites that move faster and worth more points (15)
+// space music (5)
+// is firing with movement (5)
+
 // Curr total: 75/100
 class Play extends Phaser.Scene {
     constructor() {
@@ -19,7 +20,7 @@ preload() {
     this.load.image('rocket', './assets/rocket.png');
     this.load.image('spaceship', './assets/spaceship.png');
     this.load.image('fastspaceship', `./assets/spaceship.gif`);
-    this.load.image('starfield', './assets/starfield.png');
+    this.load.image('starfield', './assets/stars.png');
     this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
 }
 

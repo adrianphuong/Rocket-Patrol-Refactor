@@ -55,7 +55,7 @@ class Menu extends Phaser.Scene {
   }
 
   update() {
-    
+    this.starfield.tilePositionX -= 4;
     // handle input key presses
     if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
       game.settings = {
