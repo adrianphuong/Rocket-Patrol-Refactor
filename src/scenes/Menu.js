@@ -58,12 +58,13 @@ class Menu extends Phaser.Scene {
     this.starfield.tilePositionX -= 4;
     // handle input key presses
     if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+      this.starfield.alpha = 1;
       game.settings = {
         spaceshipSpeed: 3,
         gameTimer: 60000    
       }
       this.sound.play('sfx_select');
-      this.scene.start("playScene");    
+      this.scene.start("playScene");
     }
     if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
       game.settings = {
@@ -71,7 +72,7 @@ class Menu extends Phaser.Scene {
         gameTimer: 45000    
       }
       this.sound.play('sfx_select');
-      this.scene.start("playScene");    
+      this.scene.start("playScene");   
     }
   }
 }

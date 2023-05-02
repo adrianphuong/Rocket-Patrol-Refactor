@@ -5,9 +5,10 @@
 // Added parallax scrolling to the menu screen (10)
 // Added new spaceship sprites that move faster and worth more points (15)
 // space music (5)
+// new background (5)
 // is firing with movement (5)
 
-// Curr total: 75/100
+// Curr total: 80/100
 class Play extends Phaser.Scene {
     constructor() {
         super("playScene");
@@ -20,7 +21,7 @@ preload() {
     this.load.image('rocket', './assets/rocket.png');
     this.load.image('spaceship', './assets/spaceship.png');
     this.load.image('fastspaceship', `./assets/spaceship.gif`);
-    this.load.image('starfield', './assets/stars.png');
+    this.load.image('stars', './assets/stars.png');
     this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
 }
 
@@ -28,7 +29,7 @@ preload() {
 // Create game objects and initialize the scene.
 create() {
     // set up the background
-    this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
+    this.stars = this.add.tileSprite(0, 0, 640, 480, 'stars').setOrigin(0, 0);
     // create borders
     this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
     this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
@@ -136,7 +137,7 @@ create() {
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
             this.scene.start("menuScene");
         }
-        this.starfield.tilePositionX -= 4;
+        this.stars.tilePositionX -= 4;
         if(!this.gameOver) {
             this.p1Rocket.update();
              this.ship01.update();
