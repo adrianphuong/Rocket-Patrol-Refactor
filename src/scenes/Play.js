@@ -7,8 +7,8 @@
 // space music (5)
 // new background (5)
 // is firing with movement (5)
-
-// Curr total: 80/100
+// random explosion SFX
+// Curr total: 90/100
 class Play extends Phaser.Scene {
     constructor() {
         super("playScene");
@@ -189,7 +189,18 @@ create() {
         // Add extra time for each destroyed ship
         this.initialTime += 3; // Add 3 seconds to the initial time
         this.timeLeft.text = 'Time: ' + (this.initialTime - this.timeElapsed); // Update the time left text
-    
-        this.sound.play('sfx_explosion');
+        var rand = Phaser.Math.Between(1, 4);
+        if(rand == 1) {
+            this.sound.play('sfx_explosion1');
+        }
+        else if (rand == 2) {
+            this.sound.play('sfx_explosion2');
+        }
+        else if (rand == 3) {
+            this.sound.play('sfx_explosion3');
+        }
+        else {
+            this.sound.play('sfx_explosion4');
+        }
     }
 }

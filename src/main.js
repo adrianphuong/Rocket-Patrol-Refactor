@@ -1,3 +1,10 @@
+/*
+Adrian Phuong
+Rocket Patrol: Space Patrol (lol)
+12 hrs
+Mods listed in Play.js
+*/
+
 let config = {
     type: Phaser.CANVAS,
     width: 640,
