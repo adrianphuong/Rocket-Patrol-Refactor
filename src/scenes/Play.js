@@ -5,10 +5,14 @@
 // Added parallax scrolling to the menu screen (10)
 // Added new spaceship sprites that move faster and worth more points (15)
 // space music (5)
-// new background (5)
+// new scrolling tile background (5)
 // is firing with movement (5)
 // random explosion SFX
-// Curr total: 90/100
+// mouse movement (15)
+// Curr total: 105/100
+
+//global variable
+//let highScore = 0;
 class Play extends Phaser.Scene {
     constructor() {
         super("playScene");
@@ -42,6 +46,25 @@ create() {
     this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*4, 'spaceship', 0, 30).setOrigin(0, 0);
     this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'spaceship', 0, 20).setOrigin(0,0);
     this.ship03 = new Spaceship(this, game.config.width, borderUISize*6 + borderPadding*4, 'fastspaceship', 0, 10).setOrigin(0,0);
+
+    // set up mouse input
+    this.input.on('pointermove', function (pointer) {
+        this.p1Rocket.x = Phaser.Math.Clamp(pointer.x, borderUISize + borderPadding, game.config.width - borderUISize - borderPadding);
+    }, this);
+
+    this.input.on('pointerdown', function (pointer) {
+        if (pointer.leftButtonDown()) {
+            if (!this.p1Rocket.isFiring) {
+                this.p1Rocket.isFiring = true;
+            }
+        }
+    }, this);
+
+    this.input.on('pointerup', function (pointer) {
+        if (pointer.leftButtonReleased() && this.p1Rocket.isFiring != true) {
+            this.p1Rocket.isFiring = false;
+        }
+    }, this);
 
     // set up keyboard input
     keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
@@ -121,9 +144,28 @@ create() {
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← to Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
+        /*// set up high score tracking
+        let highScoreConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#F3B141',
+            color: '#843605',
+            align: 'center',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 100
+        }
+        this.highScoreText = this.add.text(game.config.width/2, borderUISize + borderPadding*2,`HS: ${highScore}`, highScoreConfig).setOrigin(.5,0);*/
     }
 
     update() {
+        // check if hs is reached
+        /*if(highScore < this.p1Score) {
+            highScore = this.p1Score;
+            this.highScoreText = this.add.text(game.config.width/2, borderUISize + borderPadding*2,`HS: ${highScore}`, highScoreConfig).setOrigin(.5,0);
+        }*/
     // check if 30 seconds have passed
     if (this.initialTime - this.timeElapsed == 30) {
         // increase the speed of the spaceships
@@ -187,7 +229,7 @@ create() {
         this.scoreLeft.text = this.p1Score;
     
         // Add extra time for each destroyed ship
-        this.initialTime += 3; // Add 3 seconds to the initial time
+        this.initialTime +=3;
         this.timeLeft.text = 'Time: ' + (this.initialTime - this.timeElapsed); // Update the time left text
         var rand = Phaser.Math.Between(1, 4);
         if(rand == 1) {
